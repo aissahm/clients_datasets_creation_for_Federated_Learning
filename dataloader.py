@@ -71,6 +71,6 @@ def returnClientDatasetsNonIIDdata(Y, num_clients, alpha_dis = 0.5):
   return clients_data_obj
 
 #given the dataset X, Y, the object with indexes for every client, returns the dataset of client identified with its client_id
-def returnClientDataset(client_id, clients_datasets_object, x, y):
-  dataset_indexes = np.array(clients_datasets_object[client_id]["indexes"]).astype(int)
+def returnClientDataset(client_id, clients_data_obj, x, y):
+  dataset_indexes = np.array(clients_data_obj[client_id]["indexes"])
   return [x[dataset_indexes], y[dataset_indexes]]
