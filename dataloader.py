@@ -67,7 +67,18 @@ def returnClientDatasetsNonIIDdata(Y, num_clients, alpha_dis = 0.5):
         clustered_dataset[label] = new_label_indexes
         
     clients_data_obj[i] = {"main_class": class_pick, "indexes": client_data_indexes }
+  
+  indexes_list = list(range(0, N))
 
+  for client in clients_data_obj:
+    client_samples = clients_data_obj[client]["indexes"].shape[0]
+    if client_samples != client_sample_size:
+      num_samples_to_add = client_sample_size - client_samples
+      indexes_to_add_list = indexes_list[0:num_samples_to_add]
+      current_sample = clients_data_obj[client]["indexes"].tolist()
+      new_client_sample = np.array(current_sample + indexes_to_add_list )
+      clients_data_obj[client]["indexes"] = new_client_sample
+      
   return clients_data_obj
 
 #given the dataset X, Y, the object with indexes for every client, returns the dataset of client identified with its client_id
