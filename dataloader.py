@@ -69,6 +69,9 @@ def returnClientDatasetsNonIIDdata(Y, num_clients, alpha_dis = 0.5):
     clients_data_obj[i] = {"main_class": class_pick, "indexes": client_data_indexes }
   
   indexes_list = list(range(0, N))
+  for client in clients_data_obj:
+    client_samples_list = clients_data_obj[client]["indexes"].tolist()
+    indexes_list = list(set(indexes_list) - set(client_samples_list))
 
   for client in clients_data_obj:
     client_samples = clients_data_obj[client]["indexes"].shape[0]
