@@ -74,7 +74,8 @@ def returnClientDatasetsNonIIDdata(Y, num_clients, alpha_dis = 0.5):
     client_samples = clients_data_obj[client]["indexes"].shape[0]
     if client_samples != client_sample_size:
       num_samples_to_add = client_sample_size - client_samples
-      indexes_to_add_list = indexes_list[0:num_samples_to_add]
+      random_indexes = list(np.random.choice(range(len(indexes_list)), size=num_samples_to_add, replace=False))
+      indexes_to_add_list = np.array(indexes_list)[random_indexes].tolist()
       indexes_list = [elem for elem in indexes_list if elem not in indexes_to_add_list]
       current_sample = clients_data_obj[client]["indexes"].tolist()
       new_client_sample = np.array(current_sample + indexes_to_add_list )
