@@ -75,6 +75,7 @@ def returnClientDatasetsNonIIDdata(Y, num_clients, alpha_dis = 0.5):
     if client_samples != client_sample_size:
       num_samples_to_add = client_sample_size - client_samples
       indexes_to_add_list = indexes_list[0:num_samples_to_add]
+      indexes_list = [elem for elem in indexes_list if elem not in indexes_to_add_list]
       current_sample = clients_data_obj[client]["indexes"].tolist()
       new_client_sample = np.array(current_sample + indexes_to_add_list )
       clients_data_obj[client]["indexes"] = new_client_sample
